@@ -19,6 +19,12 @@ public class Program
             app.MapOpenApi();
         }
 
+        app.UseCors(x => x
+             .AllowAnyMethod()
+    .AllowAnyHeader()
+    .SetIsOriginAllowed(origin => true)
+    .AllowCredentials());
+
         app.MapControllers();
 
         app.Run();

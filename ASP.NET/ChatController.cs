@@ -12,12 +12,19 @@ using Microsoft.AspNetCore.Mvc;
 public class ChatController : ControllerBase
 {
     private static List<ChatMessage> messages = new();
+    private readonly ILogger<ChatController> logger;
+
+    public ChatController(ILogger<ChatController> logger)
+    {
+        this.logger = logger;
+    }
 
     [HttpPost]
     public IActionResult CreateMessage([FromBody] CreateMessageRequest request)
     {
         var message = new ChatMessage(request.Content, request.UserName);
         messages.Add(message);
+        logger.LogInformation("A message was sent.");
         return CreatedAtAction(nameof(CreateMessage), message.Id);
     }
 
