@@ -1,0 +1,18 @@
+meta {
+  name: Create Message
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:5285/chat
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "content": "Hej på dig!",
+    "username": "Superman"
+  }
+}
